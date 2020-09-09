@@ -1,14 +1,14 @@
 package org.ice1000.texgen;
 
-import org.jetbrains.annotations.TestOnly;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-@TestOnly
 public class TestMain {
-  public static void main(String... args) throws IOException {
+  @Test
+  public void simpleTest() throws IOException {
     var testTokens = List.of(
       Token.from("line1", Attribute.DEFAULT),
       Token.from("\n", Attribute.DEFAULT),
