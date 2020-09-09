@@ -17,6 +17,5 @@ public class TestMain {
     var gen = new Generator(Paths.get("build"), new GenConfig());
     gen.gen("test.tex", testTokens.stream());
     gen.gen("test2.tex", testTokens.stream());
-    System.out.println(114514);
   }
 }
