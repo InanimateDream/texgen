@@ -23,6 +23,8 @@ public class Generator {
     if (Files.exists(path) && !config.overwrite) {
       throw new FileAlreadyExistsException(path.toString());
     }
-    writer.gen(Files.newBufferedWriter(path), tokens, config);
+    try (var w = Files.newBufferedWriter(path)) {
+      writer.gen(w, tokens, config);
+    }
   }
 }
