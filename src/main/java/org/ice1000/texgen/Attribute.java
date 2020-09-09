@@ -1,9 +1,19 @@
 package org.ice1000.texgen;
 
-public class Attribute {
-  public static final Attribute DEFAULT = new Attribute(false, false, false, false, false);
+import org.jetbrains.annotations.NotNull;
 
-  public Attribute(boolean isSansSerif, boolean isTrueType, boolean isBold, boolean isItalic, boolean isDoubleStrike) {
+public class Attribute {
+  public static final Attribute DEFAULT = new Attribute("black", false, false, false, false, false);
+
+  public Attribute(
+    @NotNull String colorName,
+    boolean isSansSerif,
+    boolean isTrueType,
+    boolean isBold,
+    boolean isItalic,
+    boolean isDoubleStrike
+  ) {
+    this.colorName = colorName;
     this.isSansSerif = isSansSerif;
     this.isTrueType = isTrueType;
     this.isBold = isBold;
@@ -11,6 +21,7 @@ public class Attribute {
     this.isDoubleStrike = isDoubleStrike;
   }
 
+  public final @NotNull String colorName;
   /** \textsf */
   public final boolean isSansSerif;
   /** \texttt */
