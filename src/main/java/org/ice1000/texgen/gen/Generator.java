@@ -1,5 +1,6 @@
-package org.ice1000.texgen;
+package org.ice1000.texgen.gen;
 
+import org.ice1000.texgen.code.Token;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class Generator {
     this.config = config;
   }
 
-  public void gen(@NotNull String fileName, @NotNull Stream<@NotNull Token> tokens) throws IOException {
+  public void gen(@NotNull String fileName, @NotNull Stream<@NotNull ? extends Token> tokens) throws IOException {
     var path = root.resolve(fileName);
     if (Files.exists(path) && !config.overwrite) {
       throw new FileAlreadyExistsException(path.toString());
