@@ -19,7 +19,10 @@ public class Generator {
     this.config = config;
   }
 
-  public void gen(@NotNull String fileName, @NotNull Stream<@NotNull ? extends Token> tokens) throws IOException {
+  public void gen(
+    @NotNull String fileName,
+    @NotNull Stream<@NotNull Token> tokens
+  ) throws IOException {
     var path = root.resolve(fileName);
     if (Files.exists(path) && !config.overwrite) {
       throw new FileAlreadyExistsException(path.toString());

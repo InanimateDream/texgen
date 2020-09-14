@@ -13,10 +13,16 @@ import java.util.stream.Stream;
  * according to a given {@link GenConfig}.
  */
 public class GenerateWriter {
-  public void gen(@NotNull Writer writer, @NotNull Stream<@NotNull ? extends Token> tokens, @NotNull GenConfig config) throws IOException {
-    var res = tokens.reduce("", (acc, tk) ->
-      acc + config.teXConfig.basicConvertor.apply(tk).toCode().toString()
-    , String::concat);
+  public void gen(
+    @NotNull Writer writer,
+    @NotNull Stream<@NotNull Token> tokens,
+    @NotNull GenConfig config
+  ) throws IOException {
+    var res = tokens.reduce(""
+      , (acc, tk) ->
+        acc + config.teXConfig.basicConvertor.apply(tk).toCode().toString()
+      , String::concat
+    );
     writer.write(res);
   }
 }
