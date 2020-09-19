@@ -39,11 +39,11 @@ public enum FontStyle implements TeXStyle {
 
   @Override
   public @NotNull InlineComponent inline(@NotNull InlineComponent comp) {
-    return (InlineComponent) creator().visitInlineComponent(comp);
+    return creator().visitInlineComponent(comp);
   }
 
   @Override
   public @NotNull BlockComponent block(@NotNull BlockComponent comp) {
-    return (BlockComponent) creator().visitBlockComponent(comp);
+    return creator().visitBlockComponent(comp);
   }
 }

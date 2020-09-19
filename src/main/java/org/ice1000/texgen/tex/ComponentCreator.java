@@ -6,12 +6,12 @@ public interface ComponentCreator extends TeXComponentVisitor<TeXComponent> {
   @NotNull CharSequence toCode(@NotNull TeXComponent comp);
 
   @Override
-  default @NotNull TeXComponent visitInlineComponent(@NotNull InlineComponent inl) {
-    return (InlineComponent) () -> toCode(inl);
+  default @NotNull InlineComponent visitInlineComponent(@NotNull InlineComponent inl) {
+    return () -> toCode(inl);
   }
 
   @Override
-  default @NotNull TeXComponent visitBlockComponent(@NotNull BlockComponent inr) {
-    return (BlockComponent) () -> toCode(inr);
+  default @NotNull BlockComponent visitBlockComponent(@NotNull BlockComponent inr) {
+    return () -> toCode(inr);
   }
 }
