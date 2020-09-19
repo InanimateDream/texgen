@@ -38,7 +38,7 @@ public class TestMain {
         "indentator",
         new LayoutPolicy(false, false, false, true, false, true),
         "|",
-        Optional.of(new PlainText("\\\\\\quad"))),
+        Optional.of(new PlainText("\\\\\n\\quad"))),
       new Token("literal", LayoutPolicy.BOX, "0", none),
       new Token("operator", LayoutPolicy.OPERATOR, "=>", Optional.of(new PlainText("\\Rightarrow"))),
       new Token("identifier", LayoutPolicy.BOX, "Susp", none),

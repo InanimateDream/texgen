@@ -7,11 +7,11 @@ public interface ComponentCreator extends TeXComponentVisitor<TeXComponent> {
 
   @Override
   default @NotNull TeXComponent visitInlineComponent(@NotNull InlineComponent inl) {
-    return (InlineComponent) () -> this.toCode(inl);
+    return (InlineComponent) () -> toCode(inl);
   }
 
   @Override
   default @NotNull TeXComponent visitBlockComponent(@NotNull BlockComponent inr) {
-    return (BlockComponent) () -> this.toCode(inr);
+    return (BlockComponent) () -> toCode(inr);
   }
 }

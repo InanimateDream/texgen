@@ -1,10 +1,12 @@
 package org.ice1000.texgen.tex;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public enum FontStyle implements TeXStyle {
   Normal, Upright, Slanted, Roman, TypeWriter, SansSerif, Boldface, Italic, SmallCaps;
 
+  @Contract(pure = true)
   private @NotNull String format() {
     switch (this) {
       case Normal:
@@ -30,6 +32,7 @@ public enum FontStyle implements TeXStyle {
     }
   }
 
+  @Contract(pure = true)
   private @NotNull ComponentCreator creator() {
     return comp -> String.format(format(), comp.toCode());
   }
