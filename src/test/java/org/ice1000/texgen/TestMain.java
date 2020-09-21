@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class TestMain {
@@ -19,43 +20,51 @@ public class TestMain {
   public void simpleTest() throws IOException {
     Optional<InlineComponent> none = Optional.empty();
 
+    var builder = new Token.Builder(Map.of(
+      "literal", LayoutPolicy.BOX,
+      "keyword", LayoutPolicy.BOX,
+      "identifier", LayoutPolicy.BOX,
+      "delimiter", LayoutPolicy.DELIMITER,
+      "operator", LayoutPolicy.OPERATOR
+    ));
+
     // \func Sphere (n : Nat) : \Type \lp \oo
     //    | 0 => Susp Empty
     //    | suc n => Susp (Sphere n)
     var testTokens = List.of(
-      new Token("keyword", LayoutPolicy.BOX, "\\func", Optional.of(new PlainText("func"))),
-      new Token("identifier", LayoutPolicy.BOX, "Sphere", Optional.of(new PlainText("\\mathcal{S}"))),
-      new Token("delimiter", LayoutPolicy.DELIMITER, "(", none),
-      new Token("identifier", LayoutPolicy.BOX, "n", none),
-      new Token("operator", LayoutPolicy.OPERATOR, ":", none),
-      new Token("identifier", LayoutPolicy.BOX, "Nat", none),
-      new Token("delimiter", LayoutPolicy.DELIMITER, ")", none),
-      new Token("operator", LayoutPolicy.OPERATOR, ":", none),
-      new Token("keyword", LayoutPolicy.BOX, "\\Type", Optional.of(new PlainText("\\mathcal{U}"))),
-      new Token("keyword", LayoutPolicy.BOX, "\\lp", Optional.of(new PlainText("lp"))),
-      new Token("keyword", LayoutPolicy.BOX, "\\oo", Optional.of(new PlainText("\\infty"))),
-      new Token(
+      builder.build("keyword", "\\func", Optional.of(new PlainText("func"))),
+      builder.build("identifier", "Sphere", Optional.of(new PlainText("\\mathcal{S}"))),
+      builder.build("delimiter", "(", none),
+      builder.build("identifier", "n", none),
+      builder.build("operator", ":", none),
+      builder.build("identifier", "Nat", Optional.of(new PlainText("\\mathbb{N}"))),
+      builder.build("delimiter", ")", none),
+      builder.build("operator", ":", none),
+      builder.build("keyword", "\\Type", Optional.of(new PlainText("\\mathcal{U}"))),
+      builder.build("keyword", "\\lp", Optional.of(new PlainText("lp"))),
+      builder.build("keyword", "\\oo", Optional.of(new PlainText("\\infty"))),
+      builder.cons(
         "indentator",
         new LayoutPolicy(false, false, false, true, false, true),
         "|",
         Optional.of(new PlainText("\\\\\n\\quad"))),
-      new Token("literal", LayoutPolicy.BOX, "0", none),
-      new Token("operator", LayoutPolicy.OPERATOR, "=>", Optional.of(new PlainText("\\Rightarrow"))),
-      new Token("identifier", LayoutPolicy.BOX, "Susp", none),
-      new Token("identifier", LayoutPolicy.BOX, "Empty", none),
-      new Token(
+      builder.build("literal", "0", none),
+      builder.build("operator", "=>", Optional.of(new PlainText("\\Rightarrow"))),
+      builder.build("identifier", "Susp", none),
+      builder.build("identifier", "Empty", none),
+      builder.cons(
         "indentator",
         new LayoutPolicy(false, false, false, true, false, true),
         "|",
-        Optional.of(new PlainText("\\\\\\quad"))),
-      new Token("identifier", LayoutPolicy.BOX, "suc", none),
-      new Token("identifier", LayoutPolicy.BOX, "n", none),
-      new Token("operator", LayoutPolicy.OPERATOR, "=>", Optional.of(new PlainText("\\Rightarrow"))),
-      new Token("identifier", LayoutPolicy.BOX, "Susp", none),
-      new Token("delimiter", LayoutPolicy.DELIMITER, "(", none),
-      new Token("identifier", LayoutPolicy.BOX, "Sphere", Optional.of(new PlainText("\\mathcal{S}"))),
-      new Token("identifier", LayoutPolicy.BOX, "n", none),
-      new Token("delimiter", LayoutPolicy.DELIMITER, ")", none)
+        Optional.of(new PlainText("\\\\\n\\quad"))),
+      builder.build("identifier", "suc", none),
+      builder.build("identifier", "n", none),
+      builder.build("operator", "=>", Optional.of(new PlainText("\\Rightarrow"))),
+      builder.build("identifier", "Susp", none),
+      builder.build("delimiter", "(", none),
+      builder.build("identifier", "Sphere", Optional.of(new PlainText("\\mathcal{S}"))),
+      builder.build("identifier", "n", none),
+      builder.build("delimiter", ")", none)
     );
 
     var teXConfig = new TeXConfig();
