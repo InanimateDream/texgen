@@ -5,6 +5,7 @@ import org.ice1000.texgen.code.LayoutPolicy;
 import org.ice1000.texgen.gen.GenConfig;
 import org.ice1000.texgen.gen.Generator;
 import org.ice1000.texgen.tex.InlineComponent;
+import org.ice1000.texgen.tex.MathEnv;
 import org.ice1000.texgen.tex.PlainText;
 import org.ice1000.texgen.gen.TeXConfig;
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class TestMain {
     );
 
     var teXConfig = new TeXConfig();
-    // teXConfig.basicConvertor = tk -> FontStyle.TypeWriter.inline(new PlainText(tk.getContent()));
+    teXConfig.basicConvertor = tk -> MathEnv.INSTANCE.inline(tk.getCustomTeX().orElse(new PlainText(tk.getContent())));
 
     var genConfig = new GenConfig();
     genConfig.teXConfig = teXConfig;
