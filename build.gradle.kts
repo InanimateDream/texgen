@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  api("org.jetbrains", "annotations", "19.0.0")
+  api("org.jetbrains", "annotations", "20.1.0")
   testImplementation("junit", "junit", "4.12")
 }
 
